@@ -12,6 +12,7 @@ function Selector(){
     const[selectedCountry,setSelectedCountry]=useState("");
     const [cities,setCities]=useState([]);
     const[selectedstate,setSelectedState]=useState("");
+    const [selectedCity, setSelectedCity] = useState("");
 
     useEffect(()=>{
         async function fetchCountries(){
@@ -39,6 +40,9 @@ function Selector(){
             }
         }
         fetchStates();
+        setSelectedState("");
+        setSelectedCity("");
+        setCities([]);
     },[selectedCountry]);
 
     useEffect(()=>{
@@ -52,6 +56,7 @@ function Selector(){
             }
         }
         fetchCities();
+        setSelectedCity("");
     },[selectedCountry,selectedstate]);
 
     function handleCountryChange(event){
@@ -60,7 +65,9 @@ function Selector(){
     function handleStateChange(event){
         setSelectedState(event.target.value);
     }
-
+function handleCityChange(event){
+    setSelectedCity(event.target.value);
+}
     return(
         <div style={{padding:"1rem", fontFamily:"Arial,sans-serif"}}>
             
@@ -78,13 +85,19 @@ function Selector(){
                 })}
             </select>
 
-              <select name="city" id="city"  style={{ margin: "10px", padding: "8px", fontSize: "16px", minWidth: "200px"}}>
+              <select name="city" id="city" value={selectedCity} onChange={handleCityChange} style={{ margin: "10px", padding: "8px", fontSize: "16px", minWidth: "200px"}}>
                 <option value={""}>Select City</option>
                 {cities.map((city)=>{
                     return <option key={city} value={city}>{city}</option>
                 })}
             </select>
+
+            {selectedCountry && selectedstate && selectedCity &&(
+                <p style={{marginTop:"20px",fontsize:"18px"}}>
+                    You selected {selectedCity},{selectedstate},{selectedCountry}
+                </p>
+            )} 
     </div>
-)
+);
 }
 export default Selector;
