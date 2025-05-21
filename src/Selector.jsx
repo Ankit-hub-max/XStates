@@ -64,21 +64,21 @@ function Selector(){
     return(
         <div style={{padding:"1rem", fontFamily:"Arial,sans-serif"}}>
             
-            <select name="country" id="country" value={selectedCountry} onChange={handleCountryChange}>
+            <select name="country" id="country" value={selectedCountry} onChange={handleCountryChange} style={{ margin: "10px", padding: "8px", fontSize: "16px", minWidth: "200px"}}>
                 <option value={""}>Select Country</option>
                 {countries.map((Country)=>{
                     return <option value={Country}>{Country}</option>
                 })}
             </select>
 
-              <select name="state" value={selectedstate} onChange={handleStateChange}>
+              <select name="state" value={selectedstate} onChange={handleStateChange}  style={{ margin: "10px", padding: "8px", fontSize: "16px", minWidth: "200px"}}>
                 <option value={""}>Select State</option>
                 {states.map((State)=>{
                     return <option key={State} value={State}>{State}</option>
                 })}
             </select>
 
-              <select name="city" id="city">
+              <select name="city" id="city"  style={{ margin: "10px", padding: "8px", fontSize: "16px", minWidth: "200px"}}>
                 <option value={""}>Select City</option>
                 {cities.map((city)=>{
                     return <option key={city} value={city}>{city}</option>
