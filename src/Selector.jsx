@@ -95,7 +95,7 @@ function handleCityChange(event){
 
             {selectedCountry && selectedstate && selectedCity &&(
                 <p style={{marginTop:"20px",fontSize:"18px"}}>
-                    You selected {selectedCity},{selectedstate},{selectedCountry}
+                    You selected {selectedCity}, {selectedstate}, {selectedCountry}
                 </p>
             )} 
     </div>
