@@ -47,16 +47,17 @@ function Selector(){
 
     useEffect(()=>{
         async function fetchCities(){
+            if (!selectedCountry || !selectedstate) return;
             try{
                 const response=await fetch(CityEndpoint(selectedCountry,selectedstate));
                 const data=await response.json();
                 setCities(data);
+                setSelectedCity("");
             }catch(error){
                 console.error("Error fetching cities:",error.message);
             }
         }
         fetchCities();
-        setSelectedCity("");
     },[selectedCountry,selectedstate]);
 
     function handleCountryChange(event){
@@ -74,7 +75,7 @@ function handleCityChange(event){
             <select name="country" id="country" value={selectedCountry} onChange={handleCountryChange} style={{ margin: "10px", padding: "8px", fontSize: "16px", minWidth: "200px"}}>
                 <option value={""}>Select Country</option>
                 {countries.map((Country)=>{
-                    return <option value={Country}>{Country}</option>
+                    return <option key={Country} value={Country}>{Country}</option>
                 })}
             </select>
 
@@ -93,7 +94,7 @@ function handleCityChange(event){
             </select>
 
             {selectedCountry && selectedstate && selectedCity &&(
-                <p style={{marginTop:"20px",fontsize:"18px"}}>
+                <p style={{marginTop:"20px",fontSize:"18px"}}>
                     You selected {selectedCity},{selectedstate},{selectedCountry}
                 </p>
             )} 
